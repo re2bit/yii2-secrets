@@ -1,0 +1,4 @@
+services:
+  php:
+    build:
+      target: php_with_xdebug

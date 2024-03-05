@@ -1,0 +1,75 @@
+{
+    "name": "re2bit/yii2-secrets",
+    "description": "Secrets storage and extractor for Yii2",
+    "type": "yii2-extension",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Re2bit\\Yii2Secrets\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Re2bit\\Yii2Secrets\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "René Gerritsen",
+            "email": "rene.gerritsen@me.com"
+        }
+    ],
+    "require": {
+        "php": "^7|^8",
+        "re2bit/secrets": "@dev"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "^6|^7|^8",
+        "symfony/dotenv":"*",
+        "symfony/filesystem":"*",
+        "yiisoft/yii2": "2.0.43"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        },
+        {
+            "type": "path",
+            "url": "../secrets"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    },
+    "scripts": {
+        "install-captainhook": [
+            "tools/captainhook install -c=captainhook.json"
+        ],
+        "cs": [
+            "tools/php-cs-fixer --config=.php-cs-fixer.dist.php check --verbose"
+        ],
+        "fixcs": [
+            "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix --verbose"
+        ],
+        "stan": [
+            "tools/phpstan analyse --level 8 -c phpstan.neon -n --memory-limit 2G ."
+        ],
+        "stan-b": [
+            "tools/phpstan analyse --level 8 -b tools/baseline.neon -c phpstan.neon -n --memory-limit 2G ."
+        ],
+        "test": [
+            "phpunit",
+            "tools/phpstan analyse --level 8 -c phpstan.neon -n --memory-limit 2G .",
+            "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix --verbose --dry-run"
+        ],
+        "test-ci": [
+            "phpunit --log-junit=phpunit.xml",
+            "tools/phpstan analyse --level 8 -c phpstan.neon --no-progress -n --memory-limit 2G --error-format=gitlab . >> phpstan.json",
+            "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix --verbose --dry-run"
+        ]
+    }
+}
