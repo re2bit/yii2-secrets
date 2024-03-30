@@ -16,6 +16,9 @@ services:
       - ./:/src
       - ../secrets:/secrets
     working_dir: "/src"
+    secrets:
+      - source: composer_auth
+        target: /root/.composer/auth.json
     command: ["sh", "-c", "composer update"]
   php:
     image: registry.xaer.de/xaer/php:${PHP_VERSION-7.0}-cli
@@ -29,3 +32,6 @@ services:
       - ./:/src
       - ../secrets:/secrets
     working_dir: "/src"
+secrets:
+  composer_auth:
+    file: ./auth.json

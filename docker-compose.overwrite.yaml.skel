@@ -2,3 +2,6 @@ services:
   php:
     build:
       target: php_with_xdebug
+secrets:
+  composer_auth:
+    file: ~/.composer/auth.json
