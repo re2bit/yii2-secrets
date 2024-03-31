@@ -2,8 +2,6 @@
 
 namespace yii\helpers;
 
-use yii\helpers\BaseConsole;
-
 class Console extends BaseConsole
 {
     /**
@@ -17,7 +15,7 @@ class Console extends BaseConsole
      */
     public static function stdout($string)
     {
-        static::$stdOutBuffer .= $string;
+        self::$stdOutBuffer .= $string;
         return true;
     }
 
@@ -26,9 +24,9 @@ class Console extends BaseConsole
      */
     public static function flushStdOutBuffer()
     {
-        $result = static::$stdOutBuffer;
+        $result = self::$stdOutBuffer;
         $result = self::stripAnsiFormat($result);
-        static::$stdOutBuffer = '';
+        self::$stdOutBuffer = '';
         return $result;
     }
 }

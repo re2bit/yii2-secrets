@@ -1,0 +1,14 @@
+services:
+  setup:
+    secrets:
+      - source: composer_auth
+        target: /src/auth.json
+  php:
+    build:
+      target: php_with_xdebug
+      secrets:
+        - source: composer_auth
+          target: /src/auth.json
+secrets:
+  composer_auth:
+    file: ~/.composer/auth.json

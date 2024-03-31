@@ -69,7 +69,7 @@
         ],
         "test-ci": [
             "phpunit --log-junit=phpunit-result.xml",
-            "tools/phpstan analyse --level 8 -c phpstan.neon --no-progress -n --memory-limit 2G --error-format=gitlab . >> phpstan.json",
+            "tools/phpstan analyse --level 8 -c phpstan.neon -n --memory-limit 2G --error-format=gitlab . >> phpstan.json",
             "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix --verbose --dry-run"
         ]
     }

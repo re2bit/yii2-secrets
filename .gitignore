@@ -10,4 +10,4 @@ phpstan.json
 docker/xdebug.ini
 composer.lock
 auth.json
-docker-compose.overwrite.yaml
+docker-compose.override.yaml
