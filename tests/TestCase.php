@@ -72,7 +72,7 @@ class TestCase extends PhpUnitCompatibilityLayer
         $reflectionClass = new ReflectionClass('Yii');
         $property = $reflectionClass->getProperty('app');
         $property->setAccessible(true);
-        $property->setValue(null);
+        $property->setValue(null, null);
 
     }
 

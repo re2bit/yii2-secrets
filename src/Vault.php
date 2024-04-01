@@ -60,13 +60,13 @@ class Vault extends Component
 
     /**
      * @param bool $rotate
-     * @return bool
      * @throws ErrorException
      * @throws SodiumException
+     * @return bool
      */
     public function generateKeys($rotate)
     {
-       return $this->vault->generateKeys($rotate);
+        return $this->vault->generateKeys($rotate);
     }
 
     /**
@@ -85,11 +85,11 @@ class Vault extends Component
     /**
      * Retrieves the last message from the vault.
      *
-     * @return string The last message from the vault.
+     * @return string|null The last message from the vault.
      */
     public function getLastMessage()
     {
-       return $this->vault->getLastMessage();
+        return $this->vault->getLastMessage();
     }
 
     /**
@@ -97,7 +97,7 @@ class Vault extends Component
      *
      * @param bool $reveal Whether to reveal the items' details or not.
      *
-     * @return array Returns an array containing the listed items.
+     * @return array<string,string> Returns an array containing the listed items.
      */
     public function listing(bool $reveal = false)
     {

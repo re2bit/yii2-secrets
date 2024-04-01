@@ -9,6 +9,7 @@ ARG PHP_EXTENSIONS="zip mcrypt libsodium"
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
 RUN install-php-extensions ${PHP_EXTENSIONS}
+RUN apt update && apt -y install git && rm -rf /var/lib/apt/lists/*
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 FROM php as php_with_xdebug

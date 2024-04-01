@@ -3,6 +3,7 @@
     "description": "Secrets storage and extractor for Yii2",
     "type": "yii2-extension",
     "license": "MIT",
+    "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
             "Re2bit\\Yii2Secrets\\": "src/"
@@ -21,14 +22,14 @@
     ],
     "require": {
         "php": "^7|^8",
-        "re2bit/secrets": "@dev"
+        "re2bit/secrets": "dev-main"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "phpunit/phpunit": "^6|^7|^8",
         "symfony/dotenv":"*",
         "symfony/filesystem":"*",
-        "yiisoft/yii2": "2.0.43"
+        "yiisoft/yii2": "2.0.49.3"
     },
     "repositories": [
         {
@@ -36,8 +37,8 @@
             "url": "https://asset-packagist.org"
         },
         {
-            "type": "path",
-            "url": "../secrets"
+            "type": "vcs",
+            "url": "https://github.com/re2bit/secrets"
         }
     ],
     "config": {
@@ -67,8 +68,8 @@
             "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix --verbose --dry-run"
         ],
         "test-ci": [
-            "phpunit --log-junit=phpunit.xml",
-            "tools/phpstan analyse --level 8 -c phpstan.neon --no-progress -n --memory-limit 2G --error-format=gitlab . >> phpstan.json",
+            "phpunit --log-junit=phpunit-result.xml",
+            "tools/phpstan analyse --level 8 -c phpstan.neon -n --memory-limit 2G --error-format=gitlab . >> phpstan.json",
             "tools/php-cs-fixer --config=.php-cs-fixer.dist.php fix --verbose --dry-run"
         ]
     }

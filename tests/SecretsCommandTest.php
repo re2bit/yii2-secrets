@@ -7,7 +7,9 @@ use Re2bit\Yii2Secrets\SecretsModule;
 use Re2bit\Yii2Secrets\Vault;
 use Yii;
 use yii\base\InvalidConfigException;
+use yii\base\InvalidRouteException;
 use yii\base\Module;
+use yii\console\Exception;
 use yii\helpers\Console;
 
 class SecretsCommandTest extends TestCase
@@ -39,8 +41,8 @@ class SecretsCommandTest extends TestCase
      * Emulates running controller action.
      * @param string $actionID id of action to be run.
      * @param mixed[] $actionParams action arguments.
-     * @return string command output.
      * @throws InvalidConfigException
+     * @return string command output.
      */
     protected function runControllerAction($actionID, Vault $vaultMock, $actionParams = [])
     {
@@ -52,9 +54,9 @@ class SecretsCommandTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\console\Exception
+     * @return void
      */
     public function testGeneralHelp()
     {
@@ -85,15 +87,15 @@ STRING
     }
 
     /**
-     * @return void
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\console\Exception
+     * @return void
      */
     public function testGenerateKeysHelp()
     {
         Yii::$app->runAction('help', ['secrets/default/generate-keys']);
         $output = Console::flushStdOutBuffer();
-
+        $versionString = PHP_VERSION_ID;
         $this->assertEqualsWithoutLE(<<<'STRING'
 
 DESCRIPTION
@@ -109,7 +111,7 @@ USAGE
 
 bootstrap.php secrets/default/generate-keys [rotate] [...options...]
 
-- rotate:  (defaults to 0)
+- rotate: boolean, 0 or 1 (defaults to 0)
 
 
 OPTIONS
@@ -139,8 +141,8 @@ STRING
     }
 
     /**
-     * @return void
      * @throws InvalidConfigException
+     * @return void
      */
     public function testGenerateKeys()
     {
@@ -167,8 +169,8 @@ STRING
     }
 
     /**
-     * @return void
      * @throws InvalidConfigException
+     * @return void
      */
     public function testGenerateKeysRotate()
     {
@@ -199,9 +201,9 @@ STRING
     }
 
     /**
-     * @return void
      * @throws \yii\base\InvalidRouteException
      * @throws \yii\console\Exception
+     * @return void
      */
     public function testSetHelp()
     {
@@ -221,9 +223,9 @@ USAGE
 
 bootstrap.php secrets/default/set <name> <value> [...options...]
 
-- name (required)
+- name (required): string
 
-- value (required)
+- value (required): string
 
 
 OPTIONS
@@ -253,8 +255,8 @@ STRING
     }
 
     /**
-     * @return void
      * @throws InvalidConfigException
+     * @return void
      */
     public function testSet()
     {
@@ -284,6 +286,11 @@ STRING
             , $result);
     }
 
+    /**
+     * @throws InvalidRouteException
+     * @throws Exception
+     * @return void
+     */
     public function testListHelp()
     {
         Yii::$app->runAction('help', ['secrets/default/list']);
@@ -303,7 +310,7 @@ USAGE
 
 bootstrap.php secrets/default/list [reveal] [...options...]
 
-- reveal:  (defaults to 0)
+- reveal: boolean, 0 or 1 (defaults to 0)
 
 
 OPTIONS
@@ -333,8 +340,8 @@ STRING
     }
 
     /**
-     * @return void
      * @throws InvalidConfigException
+     * @return void
      */
     public function testList()
     {
@@ -345,8 +352,8 @@ STRING
             ->getMock();
 
         $vaultMock->method('listing')->willReturn([
-            'SECRET1'=>'******',
-            'SECRET2'=>'******',
+            'SECRET1' => '******',
+            'SECRET2' => '******',
         ]);
 
         $vaultMock->method('getLastMessage')
@@ -378,9 +385,9 @@ STRING
     {
         $this->mockApplication([
             'enableCoreCommands' => false,
-            'modules' => [
+            'modules'            => [
                 'secrets' => [
-                    'class' => SecretsModule::class
+                    'class' => SecretsModule::class,
                 ],
             ],
         ]);

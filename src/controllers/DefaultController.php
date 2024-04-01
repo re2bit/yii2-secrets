@@ -14,9 +14,16 @@ use yii\console\widgets\Table;
 class DefaultController extends Controller
 {
     /**
-     * @param Vault
+     * @var Vault
      */
     private $vault;
+
+    /**
+     * @param mixed $id
+     * @param mixed$module
+     * @param Vault $vault
+     * @param mixed[] $config
+     */
     public function __construct($id, $module, Vault $vault, $config = [])
     {
         $this->vault = $vault;
@@ -31,14 +38,15 @@ class DefaultController extends Controller
      * the '--rotate' option in order to override those keys and re-encrypt
      * existing secrets.
      *
-     * @return void
+     * @param bool $rotate
      * @throws ErrorException
      * @throws SodiumException
+     * @return void
      */
     public function actionGenerateKeys(bool $rotate = false)
     {
         $this->vault->generateKeys($rotate);
-        $this->stdout($this->vault->getLastMessage());
+        $this->stdout($this->vault->getLastMessage() ?: '');
     }
 
     /**
@@ -46,12 +54,14 @@ class DefaultController extends Controller
      *
      * There's no command to rename secrets, so you'll need to create a new secret and remove the old one.
      *
+     * @param string $name
+     * @param string $value
      * @return void
      */
     public function actionSet(string $name, string $value)
     {
         $this->vault->seal($name, $value);
-        $this->stdout($this->vault->getLastMessage());
+        $this->stdout($this->vault->getLastMessage() ?: '');
     }
 
     /**
@@ -92,6 +102,6 @@ class DefaultController extends Controller
     public function actionRemove(string $name)
     {
         $this->vault->remove($name);
-        $this->stdout($this->vault->getLastMessage());
+        $this->stdout($this->vault->getLastMessage() ?: '');
     }
 }

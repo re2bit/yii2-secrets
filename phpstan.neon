@@ -1,8 +1,4 @@
-includes:
-    - ../libs/phpstan%phpVersion%/vendor/phpstan/phpstan/conf/bleedingEdge.neon
-    - ../baseline.neon
 parameters:
-    phpVersion: %currentPhpVersion%
     scanFiles:
         - vendor/yiisoft/yii2/Yii.php
     paths:

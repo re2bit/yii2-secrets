@@ -1,6 +1,14 @@
-zend_extension="xdebug.so"
+# Xdebug 3
+#xdebug.mode=develop,debug,coverage
 xdebug.mode=develop,debug
 xdebug.client_host=host.docker.internal
 xdebug.log=/tmp/xdebug.log
 xdebug.client_port=9003
 xdebug.start_with_request=true
+
+# Xdebug 2
+xdebug.remote_enable=1
+xdebug.remote_host=host.docker.internal
+xdebug.remote_port=9003
+xdebug.remote_log=/tmp/xdebug.log
+xdebug.remote_autostart=1

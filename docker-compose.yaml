@@ -4,9 +4,18 @@ x-build:
   args:
     PHP_VERSION: ${PHP_VERSION-7.0}
     COMPOSER_VERSION: ${COMPOSER_VERSION-2.2}
+    XDEBUG_VERSION: ${XDEBUG_VERSION-3.1.5}
   dockerfile: docker/Dockerfile
 
 services:
+  clean:
+    image: registry.xaer.de/xaer/php:${PHP_VERSION-7.0}-cli
+    build:
+      <<: *build
+    volumes:
+      - ./:/src
+    working_dir: "/src"
+    command: [ "sh", "-c", "rm -rf vendor || rm phpunit_results.xml || rm phpstan.json || rm composer.lock || rm .phpunit.result.cache" ]
   setup:
     image: registry.xaer.de/xaer/php:${PHP_VERSION-7.0}-cli
     build:
@@ -16,6 +25,7 @@ services:
       - ./:/src
       - ../secrets:/secrets
     working_dir: "/src"
+
     command: ["sh", "-c", "composer update"]
   php:
     image: registry.xaer.de/xaer/php:${PHP_VERSION-7.0}-cli

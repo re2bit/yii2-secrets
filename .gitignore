@@ -4,6 +4,10 @@ vendor/*
 .php_cs.cache
 .php-cs-fixer.cache
 .phpunit.result.cache
+phpunit-result.xml
 phpunit.xml
 phpstan.json
 docker/xdebug.ini
+composer.lock
+auth.json
+docker-compose.override.yaml
