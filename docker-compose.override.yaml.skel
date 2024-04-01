@@ -1,14 +1,20 @@
 services:
   setup:
+    build:
+      target: php_with_xdebug
+      args:
+        XDEBUG_VERSION: ${XDEBUG_VERSION-3.1.5}
     secrets:
       - source: composer_auth
         target: /src/auth.json
   php:
     build:
       target: php_with_xdebug
-      secrets:
-        - source: composer_auth
-          target: /src/auth.json
+      args:
+        XDEBUG_VERSION: ${XDEBUG_VERSION-3.1.5}
+    secrets:
+      - source: composer_auth
+        target: /src/auth.json
 secrets:
   composer_auth:
     file: ~/.composer/auth.json

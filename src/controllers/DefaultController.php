@@ -38,6 +38,7 @@ class DefaultController extends Controller
      * the '--rotate' option in order to override those keys and re-encrypt
      * existing secrets.
      *
+     * @param bool $rotate
      * @throws ErrorException
      * @throws SodiumException
      * @return void
@@ -53,6 +54,8 @@ class DefaultController extends Controller
      *
      * There's no command to rename secrets, so you'll need to create a new secret and remove the old one.
      *
+     * @param string $name
+     * @param string $value
      * @return void
      */
     public function actionSet(string $name, string $value)

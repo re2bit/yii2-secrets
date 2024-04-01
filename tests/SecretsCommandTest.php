@@ -95,7 +95,7 @@ STRING
     {
         Yii::$app->runAction('help', ['secrets/default/generate-keys']);
         $output = Console::flushStdOutBuffer();
-
+        $versionString = PHP_VERSION_ID;
         $this->assertEqualsWithoutLE(<<<'STRING'
 
 DESCRIPTION
@@ -111,7 +111,7 @@ USAGE
 
 bootstrap.php secrets/default/generate-keys [rotate] [...options...]
 
-- rotate:  (defaults to 0)
+- rotate: boolean, 0 or 1 (defaults to 0)
 
 
 OPTIONS
@@ -223,9 +223,9 @@ USAGE
 
 bootstrap.php secrets/default/set <name> <value> [...options...]
 
-- name (required)
+- name (required): string
 
-- value (required)
+- value (required): string
 
 
 OPTIONS
@@ -310,7 +310,7 @@ USAGE
 
 bootstrap.php secrets/default/list [reveal] [...options...]
 
-- reveal:  (defaults to 0)
+- reveal: boolean, 0 or 1 (defaults to 0)
 
 
 OPTIONS

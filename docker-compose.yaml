@@ -4,6 +4,7 @@ x-build:
   args:
     PHP_VERSION: ${PHP_VERSION-7.0}
     COMPOSER_VERSION: ${COMPOSER_VERSION-2.2}
+    XDEBUG_VERSION: ${XDEBUG_VERSION-3.1.5}
   dockerfile: docker/Dockerfile
 
 services:
