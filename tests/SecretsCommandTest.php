@@ -164,6 +164,7 @@ STRING
         $this->assertEqualsWithoutLE(<<<'STRING'
 Yii2 Vault
 
+
 STRING
             , $result);
     }
@@ -195,6 +196,7 @@ STRING
         );
         $this->assertEqualsWithoutLE(<<<'STRING'
 Yii2 Vault
+
 
 STRING
             , $result);
@@ -281,6 +283,7 @@ STRING
         );
         $this->assertEqualsWithoutLE(<<<'STRING'
 Yii2 Vault Set
+
 
 STRING
             , $result);

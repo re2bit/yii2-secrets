@@ -46,7 +46,7 @@ class DefaultController extends Controller
     public function actionGenerateKeys(bool $rotate = false)
     {
         $this->vault->generateKeys($rotate);
-        $this->stdout($this->vault->getLastMessage() ?: '');
+        $this->stdout(($this->vault->getLastMessage() ?: '') . PHP_EOL);
     }
 
     /**
@@ -61,7 +61,7 @@ class DefaultController extends Controller
     public function actionSet(string $name, string $value)
     {
         $this->vault->seal($name, $value);
-        $this->stdout($this->vault->getLastMessage() ?: '');
+        $this->stdout(($this->vault->getLastMessage() ?: '') . PHP_EOL);
     }
 
     /**
@@ -102,6 +102,6 @@ class DefaultController extends Controller
     public function actionRemove(string $name)
     {
         $this->vault->remove($name);
-        $this->stdout($this->vault->getLastMessage() ?: '');
+        $this->stdout(($this->vault->getLastMessage() ?: '') . PHP_EOL);
     }
 }
