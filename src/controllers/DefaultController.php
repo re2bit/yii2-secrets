@@ -74,7 +74,7 @@ class DefaultController extends Controller
      */
     public function actionList(bool $reveal = false)
     {
-        $secrets = $this->vault->listing();
+        $secrets = $this->vault->listing($reveal);
         $table = new Table();
         $table->setHeaders(['Name', 'Value']);
         $secrets = array_map(
