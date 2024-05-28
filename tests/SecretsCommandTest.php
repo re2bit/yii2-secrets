@@ -351,7 +351,7 @@ STRING
             ->setMethods(['listing', 'getLastMessage'])
             ->getMock();
 
-        $vaultMock->method('listing')->willReturn([
+        $vaultMock->method('listing')->with(true)->willReturn([
             'SECRET1' => '******',
             'SECRET2' => '******',
         ]);
@@ -362,7 +362,8 @@ STRING
         $result = Console::stripAnsiFormat(
             $this->runControllerAction(
                 'list',
-                $vaultMock
+                $vaultMock,
+                [true]
             )
         );
         $this->assertEqualsWithoutLE(<<<'STRING'
