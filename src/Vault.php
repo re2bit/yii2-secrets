@@ -13,7 +13,7 @@ use yii\base\Component;
 class Vault extends Component
 {
     /** @var string */
-    public $keysDir;
+    public $keysDir = '';
 
     /** @var string  */
     public $vaultClass = SodiumVault::class;
