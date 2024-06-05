@@ -39,13 +39,15 @@ class Vault extends Component
             throw new DomainException('Vault Class does not implement "' . VaultInterface::class . '" Interface');
         }
 
-        $vault = new $this->vaultClass($this->keysDir);
+        if ($this->vault === null) {
+            $vault = new $this->vaultClass($this->keysDir);
 
-        if (!($vault instanceof VaultInterface)) {
-            throw new DomainException('Vault Class does not implement "' . VaultInterface::class . '" Interface');
+            if (!($vault instanceof VaultInterface)) {
+                throw new DomainException('Vault Class does not implement "' . VaultInterface::class . '" Interface');
+            }
+
+            $this->vault = $vault;
         }
-
-        $this->vault = $vault;
     }
 
     /**
