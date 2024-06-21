@@ -22,7 +22,7 @@
     ],
     "require": {
         "php": "^7|^8",
-        "re2bit/secrets": "1.0.0-alpha.1.0"
+        "re2bit/secrets": "1.0.0-alpha.1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6|^7|^8",
