@@ -52,7 +52,31 @@ It's designed for PHP 7.0 compatibility, leveraging modern cryptography with the
       ```
 
 
-This setup ensures that your Yii2 application securely manages secrets, leveraging modern cryptography standards, even if running under PHP 7.0.
+This setup ensures that your Yii2 application securely manages secrets, leveraging modern cryptography standards, even 
+if running under PHP 7.0.
+
+### Using Secrets in Configuration
+
+To include secrets in your configuration, use the `%vault(secretName)%` format. When the configuration is parsed, 
+these placeholders will be replaced with their decrypted values.
+
+Example:
+
+```php
+$config = [
+    'components' => [
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=mydatabase',
+            'username' => '%vault(DB_USERNAME)%',
+            'password' => '%vault(DB_PASSWORD)%',
+        ],
+    ],
+];
+```
+
+In this example, `%vault(DB_USERNAME)%` and `%vault(DB_PASSWORD)%` will be replaced by their respective decrypted values
+during the configuration parsing process.
 
 ## License
 
